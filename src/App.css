@@ -34,8 +34,20 @@
 
 .card {
   padding: 2em;
+  display: flex;
+  place-content: center;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.btn {
+  display: flex;
+  gap: 1rem;
+  place-items: center;
+}
+
+.btn img {
+  width: 2rem;
 }
