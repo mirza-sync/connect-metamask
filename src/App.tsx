@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { MetaMaskInpageProvider } from "@metamask/providers";
+
+declare global {
+  interface Window {
+    ethereum: MetaMaskInpageProvider;
+  }
+}
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    if (window.ethereum.selectedAddress != null) {
+      setIsConnected(true);
+    }
+  }, []);
 
   const connect = async () => {
     if (typeof window.ethereum !== "undefined") {
@@ -14,24 +27,22 @@ function App() {
       }
     } else {
       alert("You don't have Metamask installed");
+      setIsConnected(false);
     }
   };
 
   return (
     <div className="App">
       {!isConnected ? (
-        <>
-          <h2>You are not connected to Metamask</h2>
-          <div className="card">
-            <button className="btn" onClick={() => connect()}>
-              <img src="/metamask-icon.svg" />
-              <span>Connect</span>
-            </button>
-          </div>
-        </>
+        <div className="card">
+          <button className="btn" onClick={() => connect()}>
+            <img src="/metamask-icon.svg" />
+            <span>Connect</span>
+          </button>
+        </div>
       ) : (
         <>
-          <h2>Connected: 0xabc....1ve34e</h2>
+          <h2>Connected: {window.ethereum.selectedAddress}</h2>
         </>
       )}
     </div>
