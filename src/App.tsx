@@ -49,6 +49,7 @@ function App() {
     if (typeof window.ethereum !== "undefined") {
       try {
         await window.ethereum.request({ method: "eth_requestAccounts" });
+        getNetworkDetails(window.ethereum.chainId);
         setIsConnected(true);
       } catch (e) {
         console.log(e);
