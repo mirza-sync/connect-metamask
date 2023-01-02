@@ -11,6 +11,7 @@ declare global {
 
 function App() {
   const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [network, setNetwork] = useState<Network | undefined>(undefined);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ function App() {
   const isMetamaskConnected = () => {
     if (window.ethereum.selectedAddress != null) {
       setIsConnected(true);
+      setWalletAddress(window.ethereum.selectedAddress);
       getNetworkDetails(window.ethereum.chainId);
     } else {
       setIsConnected(false);
@@ -82,7 +84,7 @@ function App() {
         </div>
       ) : (
         <div className="card">
-          <h2>Connected: {window.ethereum.selectedAddress}</h2>
+          <h2>Connected: {walletAddress}</h2>
           <div>
             <div>Network name: {network?.name ?? "Unknown"}</div>
             <div>Chain ID: {network?.chainId}</div>
