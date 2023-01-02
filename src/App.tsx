@@ -14,19 +14,21 @@ function App() {
   const [network, setNetwork] = useState<Network | undefined>(undefined);
 
   useEffect(() => {
-    if (window.ethereum.selectedAddress != null) {
-      setIsConnected(true);
-      getNetworkDetails(window.ethereum.chainId);
-    }
+    isMetamaskConnected();
   }, []);
 
   useEffect(() => {
     window.ethereum.on("chainChanged", getNetworkDetails);
+    window.ethereum.on("accountsChanged", isMetamaskConnected);
 
     return () => {
       (window as any).ethereum.removeListener(
         "chainChanged",
         getNetworkDetails
+      );
+      (window as any).ethereum.removeListener(
+        "accountsChanged",
+        isMetamaskConnected
       );
     };
   }, []);
@@ -59,6 +61,15 @@ function App() {
       setIsConnected(false);
     }
   };
+
+  const isMetamaskConnected = () => {
+    if (window.ethereum.selectedAddress != null) {
+      setIsConnected(true);
+      getNetworkDetails(window.ethereum.chainId);
+    } else {
+      setIsConnected(false);
+    }
+  }
 
   return (
     <div className="App">
