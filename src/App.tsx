@@ -63,14 +63,14 @@ function App() {
   return (
     <div className="App">
       {!isConnected ? (
-        <div className="card">
+        <div>
           <button className="btn" onClick={() => connect()}>
             <img src="/metamask-icon.svg" />
             <span>Connect</span>
           </button>
         </div>
       ) : (
-        <div>
+        <div className="card">
           <h2>Connected: {window.ethereum.selectedAddress}</h2>
           <div>
             <div>Network name: {network?.name ?? "Unknown"}</div>

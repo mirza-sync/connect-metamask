@@ -5,10 +5,16 @@
   text-align: center;
 }
 
+body {
+  background: linear-gradient(-45deg, red, blue);
+}
+
 .card {
   padding: 2em;
-  display: flex;
-  place-content: center;
+  /* display: flex;
+  place-content: center; */
+  background: white;
+  border-radius: 4px;
 }
 
 .btn {
