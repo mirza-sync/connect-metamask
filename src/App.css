@@ -26,3 +26,8 @@ body {
 .btn img {
   width: 2rem;
 }
+
+abbr[title] {
+  text-decoration: none;
+  cursor: default;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import { Network, networkList } from "../constants/networkList";
+import { ellipsisMiddle } from "./util";
 
 declare global {
   interface Window {
@@ -84,7 +85,7 @@ function App() {
         </div>
       ) : (
         <div className="card">
-          <h2>Connected: {walletAddress}</h2>
+          <h2>Connected: <abbr title={walletAddress!}>{ellipsisMiddle(walletAddress!)}</abbr></h2>
           <div>
             <div>Network name: {network?.name ?? "Unknown"}</div>
             <div>Chain ID: {network?.chainId}</div>
